@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10152f">
+<title>ST. PAUL | Bible Challenge</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1024;--panel:#141b36;--panel2:#1a2345;--line:#2b365f;--text:#f5f7ff;--muted:#aab5d5;--cyan:#57e6dc;--violet:#8a78ff;--pink:#ff6da9;--gold:#ffd36e;--green:#43d9a3;--red:#ff7185;--shadow:0 22px 60px #02061766}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:radial-gradient(ellipse at 10% 0%,#283c7b55,transparent 36%),radial-gradient(ellipse at 95% 20%,#753d9150,transparent 32%),var(--bg)}
+button,input{font:inherit}
+button{cursor:pointer;transition:transform .18s ease,filter .18s ease,background .18s ease}
+button:hover:not(:disabled){filter:brightness(1.09);transform:translateY(-1px)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+button:disabled{opacity:.5;cursor:not-allowed}
+.topbar{max-width:1180px;margin:auto;padding:24px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.12em}
+.brand-mark{width:44px;height:44px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--violet));color:#10152f;font-size:22px;box-shadow:0 8px 26px #57e6dc30}
+.brand small{display:block;font-size:10px;color:var(--muted);letter-spacing:.18em;margin-top:3px}
+.pill{border:1px solid var(--line);background:#141b36b8;border-radius:999px;padding:8px 12px;color:var(--muted);font-size:12px}
+main{width:min(1080px,100% - 32px);margin:22px auto 70px}
+.view{animation:rise .32s ease both}
+.hidden{display:none!important}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.hero{position:relative;overflow:hidden;border:1px solid #6473b84d;border-radius:30px;padding:clamp(26px,5vw,54px);background:linear-gradient(125deg,#1b2a58ed,#211b49e8 68%,#3a1d4bdb);box-shadow:var(--shadow)}
+.hero:after{content:"✦";position:absolute;right:5%;top:-55px;font-size:240px;line-height:1;color:#ffffff08;pointer-events:none}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--cyan);font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 15px var(--green)}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:clamp(34px,6vw,62px);line-height:1.04;letter-spacing:-.045em;margin:20px 0 14px;max-width:720px}
+.gradient-text{background:linear-gradient(90deg,var(--cyan),#a69aff 55%,#ff9fc8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:620px;color:#c3cbe5;font-size:16px;line-height:1.8;margin-bottom:0}
+.auth-grid{display:grid;grid-template-columns:1fr .85fr;gap:18px;margin-top:18px}
+.panel{border:1px solid var(--line);border-radius:24px;padding:clamp(20px,3vw,30px);background:linear-gradient(145deg,#171f3ded,#11172ded);box-shadow:var(--shadow)}
+.panel h2{font-size:22px;margin-bottom:8px}
+.muted{color:var(--muted);line-height:1.65;font-size:14px}
+.field{margin-top:18px}
+.field label{display:block;font-size:12px;font-weight:800;color:#c6cdec;margin-bottom:8px;letter-spacing:.04em}
+input{width:100%;padding:14px 15px;border:1px solid #35416c;border-radius:13px;background:#0d1430;color:var(--text);outline:none;transition:border .2s,box-shadow .2s}
+input::placeholder{color:#68769e}
+input:focus{border-color:var(--cyan);box-shadow:0 0 0 4px #57e6dc18}
+.btn{width:100%;border:0;border-radius:13px;padding:14px 17px;font-weight:850;color:#0d1430;background:linear-gradient(100deg,var(--cyan),#8da6ff);box-shadow:0 10px 24px #57e6dc20}
+.btn-alt{background:#232d52;color:#e9edff;border:1px solid #3b4775;box-shadow:none}
+.btn-quiet{background:transparent;color:var(--muted);border:1px solid var(--line);box-shadow:none}
+.btn-pink{background:linear-gradient(100deg,#ff8ab7,#a48aff)}
+.form-foot{font-size:13px;color:var(--muted);text-align:center;margin:17px 0 0}
+.text-link{color:var(--cyan);font-weight:800;background:none;border:0;padding:0;text-decoration:underline;text-underline-offset:4px}
+.status{white-space:pre-wrap;overflow-wrap:anywhere;margin:14px 0 0;font-size:13px;line-height:1.65;color:var(--gold)}
+.status.error{color:var(--red)}.status.success{color:var(--green)}
+.page-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:20px}
+.page-head h1{font-size:clamp(30px,4vw,44px);margin:10px 0 8px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}.actions .btn{width:auto}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.stat{padding:20px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,#1b2549,#131a34)}
+.stat-label{color:var(--muted);font-size:12px;font-weight:750}
+.stat-value{font-size:30px;font-weight:900;letter-spacing:-.04em;margin:10px 0 3px}
+.stat:nth-child(1) .stat-value{color:var(--cyan)}.stat:nth-child(2) .stat-value{color:var(--gold)}.stat:nth-child(3) .stat-value{color:#b2a5ff}
+.section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.section-title h2{margin:0;font-size:22px}
+.day-list{display:grid;gap:12px}
+.day-card{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px;border:1px solid var(--line);border-radius:18px;background:#161e3a}
+.day-card h3{margin:0 0 6px;font-size:16px}.day-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
+.day-card .btn{width:auto;min-width:128px}
+.status-tag{display:inline-flex;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:850;margin-bottom:8px;background:#293254;color:#dbe3ff}
+.status-tag.done{background:#163d3a;color:var(--green)}
+.book-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.book-card{position:relative;overflow:hidden;text-align:left;border:1px solid var(--line);border-radius:22px;padding:24px;background:linear-gradient(145deg,#1d2b55,#171c3a);color:var(--text);min-height:210px}
+.book-card:after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;right:-70px;bottom:-95px;background:var(--glow,#57e6dc);opacity:.15;filter:blur(3px)}
+.book-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:16px;background:#ffffff10;font-size:25px;margin-bottom:19px}
+.book-card h3{font-size:23px;margin-bottom:8px}.book-card p{font-size:13px;color:var(--muted);margin:0;line-height:1.7}
+.book-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.book-meta span{padding:6px 9px;border-radius:8px;background:#0c1430a6;color:#dfe6ff;font-size:11px}
+.book-card:disabled{filter:saturate(.55)}
+.progress-wrap{height:6px;border-radius:99px;background:#293354;overflow:hidden;margin-top:16px}.progress{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet));transition:width .25s}
+.quiz-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.quiz-top h1{font-size:clamp(27px,4vw,38px);margin:8px 0}
+.question-card{padding:clamp(18px,3vw,26px);border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,#182140,#11172e);margin:13px 0}
+.q-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-bottom:14px}
+.q-number{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:#28345c;color:var(--cyan);font-weight:900}
+.question-text{font-family:Arial,Tahoma,sans-serif;direction:rtl;text-align:right;font-size:20px;line-height:1.9;margin:0 0 17px}
+.options{display:grid;gap:9px}
+.option{display:flex;align-items:flex-start;gap:12px;padding:13px 14px;border:1px solid #303c64;border-radius:13px;background:#111831;cursor:pointer;transition:border .15s,background .15s}
+.option:has(input:checked){border-color:var(--cyan);background:#19303e}
+.option input{width:18px;height:18px;flex:0 0 18px;margin:3px 0 0;accent-color:var(--cyan)}
+.option-text{font-family:Arial,Tahoma,sans-serif;direction:rtl;text-align:right;line-height:1.8;flex:1}
+.sticky-submit{position:sticky;bottom:12px;padding:12px;border:1px solid #43517c;border-radius:18px;background:#0c1225ed;backdrop-filter:blur(16px);display:flex;align-items:center;gap:12px;margin-top:20px}
+.sticky-submit .btn{max-width:260px}.sticky-submit .muted{margin:0;flex:1;font-size:12px}
+.review-summary{padding:25px;border:1px solid #3a4775;border-radius:22px;background:linear-gradient(120deg,#183b4a,#26204b);margin-bottom:18px}
+.score-big{font-size:42px;font-weight:950;color:var(--cyan);margin:8px 0}
+.review-card{border:1px solid var(--line);border-radius:17px;padding:19px;margin:12px 0;background:#151d38}
+.review-card.correct{border-color:#246d5d;background:#102b2c}
+.review-card.wrong{border-color:#794257;background:#2b1b31}
+.review-card h3{font-family:Arial,Tahoma,sans-serif;direction:rtl;text-align:right;line-height:1.8;font-size:18px}
+.answer-line{font-family:Arial,Tahoma,sans-serif;direction:rtl;text-align:right;line-height:1.9;margin:10px 0 0}
+.answer-badge{display:inline-flex;align-items:center;gap:7px;border-radius:9px;padding:6px 10px;font-size:12px;font-weight:900}
+.answer-badge.good{background:#16473d;color:#72f0c0}.answer-badge.bad{background:#55283c;color:#ffabc1}
+.empty{text-align:center;border:1px dashed #3b4775;border-radius:18px;padding:30px;color:var(--muted)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:20;padding:13px 18px;border-radius:13px;background:#222d50;border:1px solid #53628f;box-shadow:var(--shadow);max-width:calc(100% - 30px);font-size:13px}
+footer{text-align:center;padding:20px;color:#7885ab;font-size:12px}
+@media(max-width:720px){.topbar{padding:16px}.auth-grid{grid-template-columns:1fr}.hero{border-radius:22px}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:1/-1}.page-head{align-items:flex-start;flex-direction:column}.actions{width:100%}.actions .btn{flex:1}.book-grid{grid-template-columns:1fr}.day-card{align-items:flex-start;flex-direction:column}.day-card .btn{width:100%}.sticky-submit{align-items:stretch;flex-direction:column}.sticky-submit .btn{max-width:none}.quiz-top{align-items:flex-start;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+.participant-card{max-width:440px;margin:18px auto;padding:24px;border-radius:22px;background:linear-gradient(145deg,#f8fbff,#e5ecff);color:#10152f;text-align:center;box-shadow:0 18px 48px #02061755}
+.participant-card .pc-brand{font-size:13px;font-weight:900;letter-spacing:.22em;color:#26376e}
+.participant-card .pc-sub{font-size:10px;letter-spacing:.18em;color:#56618a;margin-top:5px}
+.participant-card .pc-name{font-size:21px;font-weight:850;margin:18px 0 4px;overflow-wrap:anywhere}
+.participant-card .pc-code{font-size:20px;font-weight:900;letter-spacing:.08em;color:#342b8c;margin-top:12px;overflow-wrap:anywhere}
+.qr-holder{display:flex;justify-content:center;align-items:center;min-height:170px;margin:16px auto 8px}
+.qr-holder img,.qr-holder canvas{display:block!important;width:170px!important;height:170px!important}
+.pc-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.pc-actions .btn{flex:1;min-width:130px}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brand-mark">✝</div><div>ST. PAUL<small>BIBLE CHALLENGE</small></div></div>
+  <span class="pill">✨ Faith · Focus · Fellowship</span>
+</header>
+<main>
+  <section id="loginView" class="view">
+    <div class="hero">
+      <div class="eyebrow"><span class="dot"></span> YOUR DAILY WORD CHALLENGE</div>
+      <h1>DRAW CLOSER TO CHRIST<br><span class="gradient-text">Get to Know Him Through His Word.</span></h1>
+      <p class="lead">Every day is an opportunity to discover more of Jesus, grow in His Word, and build a deeper relationship with Him. Open your Bible, let His words speak to your heart, and take one step closer to Him.</p>
+    </div>
+    <div class="auth-grid">
+      <div class="panel">
+        <div class="eyebrow">WELCOME BACK</div><h2 style="margin-top:12px">Sign in to continue</h2>
+        <p class="muted">Enter your participant code to pick up where you left off.</p>
+        <form id="loginForm">
+          <div class="field"><label for="loginCode">PARTICIPANT CODE</label><input id="loginCode" autocomplete="off" autocapitalize="characters" placeholder="e.g. BQ-1234ABCD" dir="ltr" required></div>
+          <button class="btn" id="loginBtn" type="submit">Sign in <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="form-foot">New to the challenge? <button class="text-link" type="button" onclick="showView('registerView')">Create an account</button></p>
+        <p id="loginStatus" class="status" role="status" aria-live="polite"></p>
+      </div>
+      <div class="panel" style="display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#1b2344,#241b46)">
+        <div><div class="eyebrow">MADE FOR YOU</div><h2 style="font-size:27px;line-height:1.25;margin-top:14px">“Your word is a lamp to my feet and a light to my path.”</h2><p class="muted">Psalm 119:105</p></div>
+        <div class="book-meta"><span>📖 THE WAY</span><span>✦ THE TRUTH</span><span>✝ THE LIFE</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="registerView" class="view hidden">
+    <div class="hero"><div class="eyebrow">JOIN THE COMMUNITY</div><h1>Your journey<br><span class="gradient-text">starts here.</span></h1><p class="lead">Create your participant profile. Keep your code safe — you’ll use it every time you sign in.</p></div>
+    <div class="panel" style="max-width:650px;margin:18px auto 0">
+      <h2>Create your account</h2><p class="muted">All fields marked * are required.</p>
+      <form id="registerForm">
+        <div class="field"><label for="fullName">FULL NAME *</label><input id="fullName" autocomplete="name" placeholder="Your full name" required maxlength="100"></div>
+        <div class="field"><label for="phone">PHONE NUMBER *</label><input id="phone" type="tel" autocomplete="tel" placeholder="+20 1X XXXX XXXX" required maxlength="25"></div>
+        <div class="field"><label for="group">CHURCH / GROUP <span style="font-weight:400;color:var(--muted)">(optional)</span></label><input id="group" placeholder="Your church or university group" maxlength="100"></div>
+        <button class="btn" id="registerBtn" type="submit" style="margin-top:20px">Create account →</button>
+      </form>
+      <p class="form-foot">Already registered? <button class="text-link" type="button" onclick="showView('loginView')">Sign in</button></p>
+      <p id="registerStatus" class="status" role="status" aria-live="polite"></p>
+      <div id="newCodeBox" class="hidden" style="margin-top:18px;padding:18px;border:1px solid #376d65;border-radius:15px;background:#102b2c">
+        <div class="eyebrow">YOUR PARTICIPANT CODE</div><h2 id="newCode" style="font-size:28px;color:var(--cyan);margin:12px 0"></h2><p class="muted">Save your personal QR card, or copy the code to sign in later.</p>
+        <div id="registerParticipantCard" class="participant-card">
+          <div class="pc-brand">ST. PAUL</div><div class="pc-sub">BIBLE CHALLENGE · PARTICIPANT CARD</div>
+          <div class="pc-name" id="registerCardName">Participant</div>
+          <div class="qr-holder" id="registerQr"></div>
+          <div class="pc-sub">YOUR PARTICIPANT CODE</div><div class="pc-code" id="registerCardCode"></div>
+        </div>
+        <div class="pc-actions"><button type="button" class="btn btn-alt" id="copyCodeBtn">Copy code</button><button type="button" class="btn btn-alt" id="downloadRegisterCardBtn">Download card</button></div>
+        <button type="button" class="btn" id="continueBtn" style="margin-top:12px;width:100%">Continue to dashboard →</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboardView" class="view hidden">
+    <div class="page-head"><div><div class="eyebrow">YOUR PERSONAL DASHBOARD</div><h1 id="dashGreeting">Welcome back.</h1><p class="muted">Every question is a new opportunity to grow.</p></div><div class="actions"><button class="btn btn-alt" id="refreshBtn">↻ Refresh</button><button class="btn btn-quiet" id="logoutBtn">Sign out</button></div></div>
+    <div class="stats">
+      <div class="stat"><div class="stat-label">DAYS COMPLETED</div><div class="stat-value" id="completedStat">0</div><div class="muted">Daily challenges finished</div></div>
+      <div class="stat"><div class="stat-label">TOTAL POINTS</div><div class="stat-value" id="scoreStat">0 / 0</div><div class="muted">Your overall score</div></div>
+      <div class="stat"><div class="stat-label">DAYS TO CATCH UP</div><div class="stat-value" id="missedStat">0</div><div class="muted">Challenges still available</div></div>
+    </div>
+    <div class="panel" style="margin-bottom:18px">
+      <div class="section-title"><h2>Your participant card</h2><span class="pill">Keep it for next time</span></div>
+      <p class="muted">Download this card to your phone. You can always sign in with the code shown on it.</p>
+      <div id="dashboardParticipantCard" class="participant-card">
+        <div class="pc-brand">ST. PAUL</div><div class="pc-sub">BIBLE CHALLENGE · PARTICIPANT CARD</div>
+        <div class="pc-name" id="dashboardCardName">Participant</div>
+        <div class="qr-holder" id="dashboardQr"></div>
+        <div class="pc-sub">YOUR PARTICIPANT CODE</div><div class="pc-code" id="dashboardCardCode"></div>
+      </div>
+      <div class="pc-actions"><button type="button" class="btn btn-alt" id="copyDashboardCodeBtn">Copy code</button><button type="button" class="btn" id="downloadDashboardCardBtn">Download card</button></div>
+    </div>
+    <div class="panel"><div class="section-title"><h2>Daily challenges</h2><span class="pill" id="dayCount">0 challenges</span></div><p class="muted">Choose any available day. Once submitted, a day cannot be attempted again.</p><div id="dayList" class="day-list"></div></div>
+  </section>
+
+  <section id="booksView" class="view hidden">
+    <div class="page-head"><div><div class="eyebrow">DAILY CHALLENGE</div><h1 id="booksHeading">Choose your book.</h1><p class="muted">Complete each book’s questions to finish today’s challenge.</p></div><div class="actions"><button class="btn btn-quiet" id="backDaysBtn">← All days</button></div></div>
+    <div class="stats">
+      <div class="stat"><div class="stat-label">QUESTIONS</div><div class="stat-value" id="totalQStat">10</div><div class="muted">For this challenge</div></div>
+      <div class="stat"><div class="stat-label">BOOKS FINISHED</div><div class="stat-value" id="booksDoneStat">0 / 2</div><div class="muted">Keep your momentum</div></div>
+      <div class="stat"><div class="stat-label">YOUR PROGRESS</div><div class="stat-value" id="progressStat">0%</div><div class="muted">Questions answered</div></div>
+    </div>
+    <div id="bookGrid" class="book-grid"></div>
+    <div class="panel" style="margin-top:18px">
+      <div class="section-title"><h2>Ready to submit?</h2><span class="pill">One attempt per day</span></div>
+      <p class="muted">Answer every question in both books, then submit your daily challenge.</p>
+      <button class="btn" id="submitDayBtn" type="button">Submit daily challenge →</button>
+      <p id="submitDayStatus" class="status" role="status" aria-live="polite"></p>
+    </div>
+    <div class="panel" style="margin-top:18px">
+      <div class="section-title"><h2>Ready to submit?</h2><span class="pill">One attempt per day</span></div>
+      <p class="muted">When you have answered every question in both books, submit your daily challenge to receive your score.</p>
+      <button class="btn" id="submitDayBtn" type="button">Submit daily challenge →</button>
+      <p id="submitDayStatus" class="status" role="status" aria-live="polite"></p>
+    </div>
+    <div class="panel" style="margin-top:18px"><div class="section-title"><h2>Daily progress</h2><span class="muted" id="progressLabel">0 of 10 answered</span></div><div class="progress-wrap"><div class="progress" id="overallProgress"></div></div><p class="muted" style="margin:12px 0 0">Your selections are kept while you switch between books on this page.</p><button class="btn btn-pink hidden" id="submitDayBtn" style="margin-top:20px">Submit daily challenge →</button></div>
+  </section>
+
+  <section id="quizView" class="view hidden">
+    <div class="quiz-top"><div><div class="eyebrow" id="quizEyebrow">BOOK QUESTIONS</div><h1 id="quizHeading">Proverbs</h1><p class="muted" id="quizSubheading">Chapter 1 · Question 1 of 5</p></div><button class="btn btn-quiet" id="backBooksBtn" style="width:auto">← All books</button></div>
+    <div class="progress-wrap"><div class="progress" id="bookProgress"></div></div>
+    <form id="bookQuizForm"><div id="bookQuestions"></div><div class="sticky-submit"><p class="muted" id="bookSubmitHint">Choose an answer for every question in this book.</p><button class="btn" id="finishBookBtn" type="submit">Save book answers →</button></div></form>
+  </section>
+
+  <section id="reviewView" class="view hidden">
+    <div class="hero" style="margin-bottom:18px"><div class="eyebrow">CHALLENGE COMPLETE</div><h1>Every step<br><span class="gradient-text">counts.</span></h1><p class="lead">Your answers have been checked. Review what you learned and keep going.</p></div>
+    <div class="review-summary"><div class="eyebrow">YOUR RESULT</div><div class="score-big" id="finalScore">0 / 10</div><p id="resultMessage" class="muted">Great effort.</p></div>
+    <div class="panel"><div class="section-title"><h2>Answer review</h2><span class="pill" id="reviewCount">0 questions</span></div><div id="reviewList"></div><button class="btn" id="reviewDashboardBtn" style="margin-top:18px">Back to dashboard →</button></div>
+  </section>
+</main>
+<footer>ST. PAUL · BIBLE CHALLENGE · Built for our family</footer>
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+<script>
+'use strict';
+const API = 'https://script.google.com/macros/s/AKfycbxXD17LB2tX0dtuyYFaLbSEGJNYZXObhWMV4t4dhk8fMqTmriKHXgFp1LYpVcFOnuaC/exec';
+const $ = id => document.getElementById(id);
+const state = {code:'', participant:null, days:[], date:'', questions:[], answers:{}, activeBook:'', busy:false, toastTimer:null};
+
+const BOOKS = [
+  {key:'proverbs',name:'Proverbs',arabic:'سفر الأمثال',icon:'📜',glow:'#57e6dc'},
+  {key:'acts',name:'Acts',arabic:'سفر أعمال الرسل',icon:'🕊️',glow:'#ff6da9'}
+];
+
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('hidden',v.id !== id));
+  window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+}
+function setStatus(id,text,type='') {
+  const el=$(id); el.textContent=text; el.className='status'+(type?' '+type:'');
+}
+function toast(text) {
+  const el=$('toast'); el.textContent=text; el.classList.remove('hidden');
+  clearTimeout(state.toastTimer); state.toastTimer=setTimeout(()=>el.classList.add('hidden'),3200);
+}
+function setBusy(button,busy,label) {
+  button.disabled=busy;
+  if(!button.dataset.original) button.dataset.original=button.textContent.trim();
+  button.textContent=busy?label:button.dataset.original;
+}
+async function api(action,payload={}) {
+  const response=await fetch(API,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,...payload})});
+  if(!response.ok) throw new Error('Server connection failed. Please try again.');
+  const result=await response.json();
+  return result;
+}
+function safeError(e) { return e&&e.message?e.message:'Something went wrong. Please try again.'; }
+
+$('loginForm').addEventListener('submit',async e=>{
+  e.preventDefault(); if(state.busy)return;
+  const code=$('loginCode').value.trim().toUpperCase();
+  if(!code){setStatus('loginStatus','Please enter your participant code.','error');return;}
+  state.busy=true;setBusy($('loginBtn'),true,'Signing in…');setStatus('loginStatus','Verifying your code…');
+  try{
+    const r=await api('dashboard',{code});
+    if(!r.ok)throw new Error(r.error||'Invalid participant code.');
+    state.code=code;state.participant=r.data.participant||{};state.days=r.data.days||[];
+    setStatus('loginStatus','','');await renderDashboard(r.data);showView('dashboardView');
+  }catch(err){setStatus('loginStatus',safeError(err),'error');}
+  finally{state.busy=false;setBusy($('loginBtn'),false);}
+});
+
+
+function drawQr(targetId, code){
+  const target=$(targetId);
+  target.innerHTML='';
+  if(!window.QRCode){target.textContent='QR code library could not load. Please use the code below.';return;}
+  new QRCode(target,{text:String(code),width:170,height:170,colorDark:'#10152f',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+}
+function renderParticipantCards(code, name){
+  $('registerCardName').textContent=name||'Participant';
+  $('registerCardCode').textContent=code||'';
+  drawQr('registerQr',code);
+  $('dashboardCardName').textContent=name||'Participant';
+  $('dashboardCardCode').textContent=code||'';
+  drawQr('dashboardQr',code);
+}
+async function downloadParticipantCard(cardId, fileName){
+  const card=$(cardId);
+  if(!window.html2canvas){toast('Card download library could not load. Please try again later.');return;}
+  try{
+    const canvas=await html2canvas(card,{backgroundColor:null,scale:2,useCORS:true});
+    const link=document.createElement('a');
+    link.download=fileName;
+    link.href=canvas.toDataURL('image/png');
+    link.click();
+  }catch(e){toast('Could not download the card. Please take a screenshot instead.');}
+}
+
+$('registerForm').addEventListener('submit',async e=>{
+  e.preventDefault();if(state.busy)return;
+  const name=$('fullName').value.trim(),phone=$('phone').value.trim(),group=$('group').value.trim();
+  if(!name||!phone){setStatus('registerStatus','Please fill in your name and phone number.','error');return;}
+  state.busy=true;setBusy($('registerBtn'),true,'Creating account…');setStatus('registerStatus','Setting up your participant profile…');
+  try{
+    const r=await api('register',{data:{name,phone,group}});
+    if(!r.ok)throw new Error(r.error||'Could not create your account.');
+    state.code=r.data.code;state.participant={name,phone,group};
+    $('newCode').textContent=state.code;$('newCodeBox').classList.remove('hidden');renderParticipantCards(state.code,name);
+    $('registerStatus').textContent='Your account is ready!';
+    $('registerStatus').className='status success';
+    $('continueBtn').focus();
+  }catch(err){setStatus('registerStatus',safeError(err),'error');}
+  finally{state.busy=false;setBusy($('registerBtn'),false);}
+});
+
+$('copyCodeBtn').addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(state.code);toast('Participant code copied. Keep it safe!');}
+  catch{toast('Please copy your code manually: '+state.code);}
+});
+$('downloadRegisterCardBtn').addEventListener('click',()=>downloadParticipantCard('registerParticipantCard','ST-PAUL-card.png'));
+$('downloadDashboardCardBtn').addEventListener('click',()=>downloadParticipantCard('dashboardParticipantCard','ST-PAUL-card.png'));
+$('copyDashboardCodeBtn').addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(state.code);toast('Participant code copied.');}
+  catch{toast('Please copy your code manually: '+state.code);}
+});
+$('continueBtn').addEventListener('click',async()=>{
+  $('loginCode').value=state.code;
+  try{const r=await api('dashboard',{code:state.code});if(!r.ok)throw new Error(r.error||'Could not load dashboard.');state.participant=r.data.participant||state.participant;state.days=r.data.days||[];await renderDashboard(r.data);showView('dashboardView');}
+  catch(e){showView('loginView');setStatus('loginStatus','Account created. Your code is '+state.code+'. Please sign in.','success');}
+});
+
+async function renderDashboard(d) {
+  const p=d.participant||state.participant||{};
+  renderParticipantCards(state.code,p.name||'Participant');
+  $('dashGreeting').textContent='Welcome back'+(p.name?' , '+p.name:'')+'!';
+  $('completedStat').textContent=Number(d.completedDays||0);
+  $('scoreStat').textContent=`${Number(d.score||0)} / ${Number(d.total||0)}`;
+  $('missedStat').textContent=Number(d.missedDays||0);
+  state.days=d.days||[];
+  $('dayCount').textContent=`${state.days.length} challenge${state.days.length===1?'':'s'}`;
+  const root=$('dayList');root.replaceChildren();
+  if(!state.days.length){root.innerHTML='<div class="empty">No challenges are available yet. Check back soon!</div>';return;}
+  state.days.forEach(day=>{
+    const card=document.createElement('div');card.className='day-card';
+    const left=document.createElement('div');
+    const tag=document.createElement('span');tag.className='status-tag'+(day.completed?' done':'');tag.textContent=day.completed?'COMPLETED ✓':'READY TO PLAY';left.appendChild(tag);
+    const title=document.createElement('h3');title.textContent=day.date;left.appendChild(title);
+    const desc=document.createElement('p');
+    if(day.completed){
+      desc.textContent = day.score !== null && day.score !== undefined
+        ? `Daily result: ${day.score} / ${day.total ?? 10} points · Completed ✓`
+        : 'You have submitted this challenge.';
+    }else{
+      desc.textContent=`${day.total ?? 10} questions · THE WAY +THE TRUTH +THE LIFE`;
+    }
+    left.appendChild(desc);
+    const btn=document.createElement('button');btn.className='btn'+(day.completed?' btn-alt':'');btn.textContent=day.completed?'Completed':'Start challenge →';btn.disabled=!!day.completed;btn.addEventListener('click',()=>startDay(day.date));card.append(left,btn);root.appendChild(card);
+  });
+}
+async function loadDashboard() {
+  if(!state.code||state.busy)return;
+  state.busy=true;setBusy($('refreshBtn'),true,'Refreshing…');
+  try{const r=await api('dashboard',{code:state.code});if(!r.ok)throw new Error(r.error||'Could not refresh.');state.participant=r.data.participant||state.participant;await renderDashboard(r.data);toast('Dashboard updated.');}
+  catch(e){toast(safeError(e));}
+  finally{state.busy=false;setBusy($('refreshBtn'),false);}
+}
+async function startDay(date) {
+  if(state.busy)return;
+  state.busy=true;
+  try{
+    const r=await api('questions',{code:state.code,date});
+    if(!r.ok)throw new Error(r.error||'Could not load questions.');
+    if(!Array.isArray(r.data)||!r.data.length)throw new Error('No questions found for this day.');
+    state.date=date;state.questions=r.data.map((q,i)=>({...q,_qid:String(i)}));state.answers={};state.activeBook='';
+    showBooks();showView('booksView');
+  }catch(e){toast(safeError(e));}
+  finally{state.busy=false;}
+}
+function bookForQuestion(q) {
+  const t=String(q.type||'').toLowerCase(), b=String(q.book||'').toLowerCase();
+  if(t.includes('old')||t.includes('عهد قديم')||b.includes('proverb')||b.includes('امثال'))return 'proverbs';
+  if(t.includes('new')||t.includes('عهد جديد')||b.includes('acts')||b.includes('اعمال')||b.includes('أعمال'))return 'acts';
+  return null;
+}
+function getBookQuestions(key){return state.questions.filter(q=>bookForQuestion(q)===key);}
+function getChapter(q){return q.chapter??q.ch??'';}
+function showBooks() {
+  const groups=BOOKS.map(b=>({...b,questions:getBookQuestions(b.key)}));
+  const answered=state.questions.filter(q=>!!state.answers[q._qid]).length;
+  const total=state.questions.length;
+  const finished=groups.filter(g=>g.questions.length&&g.questions.every(q=>state.answers[q._qid])).length;
+  $('booksHeading').textContent='Choose your book.';
+  $('totalQStat').textContent=total;$('booksDoneStat').textContent=`${finished} / ${groups.filter(g=>g.questions.length).length}`;
+  $('progressStat').textContent=(total?Math.round(answered/total*100):0)+'%';
+  $('progressLabel').textContent=`${answered} of ${total} answered`;
+  $('overallProgress').style.width=(total?answered/total*100:0)+'%';
+  $('submitDayBtn').classList.toggle('hidden',!(total>0&&answered===total));
+  const root=$('bookGrid');root.replaceChildren();
+  groups.forEach((g,idx)=>{
+    const done=g.questions.length>0&&g.questions.every(q=>state.answers[q._qid]);
+    const card=document.createElement('button');card.type='button';card.className='book-card';card.style.setProperty('--glow',g.glow);card.disabled=!g.questions.length;
+    const icon=document.createElement('div');icon.className='book-icon';icon.textContent=g.icon;
+    const name=document.createElement('h3');name.textContent=g.name;
+    const ar=document.createElement('p');ar.textContent=g.arabic+' · '+g.questions.length+' questions';
+    const chapterVals=[...new Set(g.questions.map(getChapter).filter(v=>v!==''&&v!=null))];
+    const meta=document.createElement('div');meta.className='book-meta';
+    const chapter=document.createElement('span');chapter.textContent=chapterVals.length?'Chapter '+chapterVals.join(', '):'Chapter not specified';meta.appendChild(chapter);
+    const count=document.createElement('span');count.textContent=done?'Completed ✓':`${g.questions.length} questions`;meta.appendChild(count);
+    card.append(icon,name,ar,meta);
+    card.addEventListener('click',()=>openBook(g.key));root.appendChild(card);
+  });
+}
+function openBook(key) {
+  const qs=getBookQuestions(key);if(!qs.length){toast('No questions found for this book.');return;}
+  state.activeBook=key;
+  const b=BOOKS.find(x=>x.key===key);$('quizEyebrow').textContent=b.arabic+' · '+state.date;
+  $('quizHeading').textContent=b.name;
+  $('quizSubheading').textContent=`${qs.length} questions · Chapter ${[...new Set(qs.map(getChapter).filter(Boolean))].join(', ')||'—'}`;
+  $('bookProgress').style.width=(qs.filter(q=>state.answers[q._qid]).length/qs.length*100)+'%';
+  const root=$('bookQuestions');root.replaceChildren();
+  qs.forEach((q,idx)=>{
+    const box=document.createElement('article');box.className='question-card';
+    const meta=document.createElement('div');meta.className='q-meta';
+    const number=document.createElement('span');number.className='q-number';number.textContent=idx+1;
+    const chap=document.createElement('span');chap.textContent='Chapter '+(getChapter(q)||'—');
+    const type=document.createElement('span');type.className='pill';type.textContent=q.type||b.name;
+    meta.append(number,chap,type);
+    const title=document.createElement('h2');title.className='question-text';title.textContent=q.question||'';
+    const opts=document.createElement('div');opts.className='options';
+    const letters=['A','B','C','D'];
+    letters.forEach((letter,j)=>{
+      const label=document.createElement('label');label.className='option';
+      const radio=document.createElement('input');radio.type='radio';radio.name='question-'+q._qid;radio.value=letter;radio.required=true;radio.checked=state.answers[q._qid]===letter;
+      radio.addEventListener('change',()=>{state.answers[q._qid]=letter;updateBookProgress();});
+      const text=document.createElement('span');text.className='option-text';text.textContent=q.options&&q.options[j]!==undefined?q.options[j]:'';
+      label.append(radio,text);opts.appendChild(label);
+    });
+    box.append(meta,title,opts);root.appendChild(box);
+  });
+  $('bookSubmitHint').textContent=`Choose an answer for all ${qs.length} questions before saving.`;
+  $('finishBookBtn').textContent='Save book answers →';showView('quizView');
+}
+function updateBookProgress(){
+  const qs=getBookQuestions(state.activeBook),count=qs.filter(q=>state.answers[q._qid]).length;
+  $('bookProgress').style.width=(qs.length?count/qs.length*100:0)+'%';
+  $('bookSubmitHint').textContent=count===qs.length?'All questions answered. Ready to continue!':`${count} of ${qs.length} answered`;
+}
+$('bookQuizForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const qs=getBookQuestions(state.activeBook);
+  if(qs.some(q=>!state.answers[q._qid])){toast('Please answer every question in this book.');return;}
+  showBooks();showView('booksView');
+  toast('Book answers saved. Complete the other book, then submit your challenge.');
+});
+
+async function submitDailyChallenge(){
+  if(state.busy)return;
+  const unanswered=state.questions.filter(q=>!state.answers[q._qid]);
+  if(unanswered.length){
+    toast(`Please answer all questions first. ${unanswered.length} remaining.`);
+    const key=bookForQuestion(unanswered[0]);
+    if(key)openBook(key);
+    return;
+  }
+  if(!confirm('Submit your daily challenge? You cannot retake this day.'))return;
+  state.busy=true;setBusy($('submitDayBtn'),true,'Submitting…');
+  $('submitDayStatus').textContent='Submitting answers and calculating your score…';
+  try{
+    const answers=state.questions.map(q=>state.answers[q._qid]);
+    const r=await api('submit',{data:{code:state.code,date:state.date,answers}});
+    if(!r.ok)throw new Error(r.error||'Could not submit your answers.');
+    const data=r.data||{};
+    $('finalScore').textContent=`${data.score ?? 0} / ${data.total ?? state.questions.length}`;
+    $('resultMessage').textContent=Number(data.score||0)===Number(data.total||state.questions.length)
+      ?'Perfect score! Amazing work.'
+      :'Great effort! Review the answers and keep growing in the Word.';
+    $('reviewCount').textContent=`${(data.review||[]).length} questions`;
+    const root=$('reviewList');root.replaceChildren();
+    (data.review||[]).forEach((item,i)=>{
+      const q=state.questions[i]||{}, opts=item.options||q.options||[];
+      const textFor=value=>{
+        const raw=String(value??'').trim(), m=raw.match(/^([A-D])$/i);
+        return m ? (opts['ABCD'.indexOf(m[1].toUpperCase())] ?? raw) : raw;
+      };
+      const box=document.createElement('article');box.className='review-card '+(item.isCorrect?'correct':'wrong');
+      const badge=document.createElement('span');badge.className='answer-badge '+(item.isCorrect?'good':'bad');badge.textContent=item.isCorrect?'✓ Correct':'✕ Incorrect';
+      const title=document.createElement('h3');title.textContent=`${i+1}. ${item.question||q.question||''}`;
+      const chosen=document.createElement('p');chosen.className='answer-line';chosen.textContent='Your answer: '+(textFor(item.chosen)||'No answer');
+      const correct=document.createElement('p');correct.className='answer-line';correct.textContent='Correct answer: '+(textFor(item.correct)||'Unavailable');
+      box.append(badge,title,chosen,correct);root.appendChild(box);
+    });
+    state.questions=[];state.answers={};state.date='';
+    showView('reviewView');
+  }catch(err){
+    $('submitDayStatus').textContent=safeError(err);
+    $('submitDayStatus').className='status error';
+    toast(safeError(err));
+  }finally{state.busy=false;setBusy($('submitDayBtn'),false);}
+}
+$('submitDayBtn').addEventListener('click',submitDailyChallenge);
+
+$('backBooksBtn').addEventListener('click',()=>{showBooks();showView('booksView');});
+$('backDaysBtn').addEventListener('click',()=>{showView('dashboardView');});
+$('refreshBtn').addEventListener('click',loadDashboard);
+$('logoutBtn').addEventListener('click',()=>{state.code='';state.participant=null;state.days=[];state.questions=[];state.answers={};state.date='';$('loginCode').value='';setStatus('loginStatus','','');showView('loginView');});
+$('reviewDashboardBtn').addEventListener('click',async()=>{showView('dashboardView');await loadDashboard();});
+</script>
+</body>
+</html>
